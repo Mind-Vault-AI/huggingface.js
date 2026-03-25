@@ -14,15 +14,15 @@
 
 await createRepo({
   repo: { type: "model", name: "my-user/nlp-model" },
-  accessToken: HF_TOKEN
+  accessToken: HF\_TOKEN
 });
 
 await uploadFile({
   repo: "my-user/nlp-model",
-  accessToken: HF_TOKEN,
+  accessToken: HF\_TOKEN,
   // Can work with native File in browsers
   file: {
-    path: "pytorch_model.bin",
+    path: "pytorch\_model.bin",
     content: new Blob(...)
   }
 });
@@ -32,13 +32,13 @@ await uploadFile({
 await inference.chatCompletion({
   model: "meta-llama/Llama-3.1-8B-Instruct",
   provider: "sambanova", // or together, fal-ai, replicate, cohere …
-  messages: [
+  messages: \[
     {
       role: "user",
       content: "Hello, nice to meet you!",
     },
   ],
-  max_tokens: 512,
+  max\_tokens: 512,
   temperature: 0.5,
 });
 
@@ -55,16 +55,17 @@ await inference.textToImage({
 
 This is a collection of JS libraries to interact with the Hugging Face API, with TS types included.
 
-- [@huggingface/hub](packages/hub/README.md): Interact with huggingface.co to create or delete repos and commit / download files
-- [@huggingface/inference](packages/inference/README.md): Use all supported (serverless) Inference Providers or switch to Inference Endpoints (dedicated) to make calls to 100,000+ Machine Learning models
-- [@huggingface/mcp-client](packages/mcp-client/README.md): A Model Context Protocol (MCP) client, and a tiny Agent library, built on top of InferenceClient.
-- [@huggingface/gguf](packages/gguf/README.md): A GGUF parser that works on remotely hosted files.
-- [@huggingface/dduf](packages/dduf/README.md): Similar package for DDUF (DDUF Diffusers Unified Format)
-- [@huggingface/tasks](packages/tasks/README.md): The definition files and source-of-truth for the Hub's main primitives like pipeline tasks, model libraries, etc.
-- [@huggingface/jinja](packages/jinja/README.md): A minimalistic JS implementation of the Jinja templating engine, to be used for ML chat templates.
-- [@huggingface/space-header](packages/space-header/README.md): Use the Space `mini_header` outside Hugging Face
-- [@huggingface/ollama-utils](packages/ollama-utils/README.md): Various utilities for maintaining Ollama compatibility with models on the Hugging Face Hub.
-- [@huggingface/tiny-agents](packages/tiny-agents/README.md): A tiny, model-agnostic library for building AI agents that can use tools.
+* [@huggingface/hub](packages/hub/README.md): Interact with huggingface.co to create or delete repos and commit / download files
+* [@huggingface/inference](packages/inference/README.md): Use all supported (serverless) Inference Providers or switch to Inference Endpoints (dedicated) to make calls to 100,000+ Machine Learning models
+* [@huggingface/mcp-client](packages/mcp-client/README.md): A Model Context Protocol (MCP) client, and a tiny Agent library, built on top of InferenceClient.
+* [@huggingface/gguf](packages/gguf/README.md): A GGUF parser that works on remotely hosted files.
+* [@huggingface/dduf](packages/dduf/README.md): Similar package for DDUF (DDUF Diffusers Unified Format)
+* [@huggingface/tasks](packages/tasks/README.md): The definition files and source-of-truth for the Hub's main primitives like pipeline tasks, model libraries, etc.
+* [@huggingface/jinja](packages/jinja/README.md): A minimalistic JS implementation of the Jinja templating engine, to be used for ML chat templates.
+* [@huggingface/space-header](packages/space-header/README.md): Use the Space `mini\_header` outside Hugging Face
+* [@huggingface/ollama-utils](packages/ollama-utils/README.md): Various utilities for maintaining Ollama compatibility with models on the Hugging Face Hub.
+* [@huggingface/tiny-agents](packages/tiny-agents/README.md): A tiny, model-agnostic library for building AI agents that can use tools.
+
 
 
 We use modern features to avoid polyfills and dependencies, so the libraries will only work on modern browsers / Node.js >= 18 / Bun / Deno.
@@ -125,32 +126,32 @@ Get your HF access token in your [account settings](https://huggingface.co/setti
 ```ts
 import { InferenceClient } from "@huggingface/inference";
 
-const HF_TOKEN = "hf_...";
+const HF\_TOKEN = "hf\_...";
 
-const client = new InferenceClient(HF_TOKEN);
+const client = new InferenceClient(HF\_TOKEN);
 
 // Chat completion API
 const out = await client.chatCompletion({
   model: "meta-llama/Llama-3.1-8B-Instruct",
-  messages: [{ role: "user", content: "Hello, nice to meet you!" }],
-  max_tokens: 512
+  messages: \[{ role: "user", content: "Hello, nice to meet you!" }],
+  max\_tokens: 512
 });
-console.log(out.choices[0].message);
+console.log(out.choices\[0].message);
 
 // Streaming chat completion API
 for await (const chunk of client.chatCompletionStream({
   model: "meta-llama/Llama-3.1-8B-Instruct",
-  messages: [{ role: "user", content: "Hello, nice to meet you!" }],
-  max_tokens: 512
+  messages: \[{ role: "user", content: "Hello, nice to meet you!" }],
+  max\_tokens: 512
 })) {
-  console.log(chunk.choices[0].delta.content);
+  console.log(chunk.choices\[0].delta.content);
 }
 
 /// Using a third-party provider:
 await client.chatCompletion({
   model: "meta-llama/Llama-3.1-8B-Instruct",
-  messages: [{ role: "user", content: "Hello, nice to meet you!" }],
-  max_tokens: 512,
+  messages: \[{ role: "user", content: "Hello, nice to meet you!" }],
+  max\_tokens: 512,
   provider: "sambanova", // or together, fal-ai, replicate, cohere …
 })
 
@@ -166,8 +167,8 @@ await client.textToImage({
 await client.translation({
   inputs: "My name is Wolfgang and I live in Amsterdam",
   parameters: {
-    src_lang: "en",
-    tgt_lang: "fr",
+    src\_lang: "en",
+    tgt\_lang: "fr",
   },
 });
 
@@ -179,7 +180,7 @@ await client.imageToText({
 
 // Using your own dedicated inference endpoint: https://hf.co/docs/inference-endpoints/
 const gpt2Client = client.endpoint('https://xyz.eu-west-1.aws.endpoints.huggingface.cloud/gpt2');
-const { generated_text } = await gpt2Client.textGeneration({ inputs: 'The answer to the universe is' });
+const { generated\_text } = await gpt2Client.textGeneration({ inputs: 'The answer to the universe is' });
 
 // Chat Completion
 const llamaEndpoint = client.endpoint(
@@ -187,10 +188,10 @@ const llamaEndpoint = client.endpoint(
 );
 const out = await llamaEndpoint.chatCompletion({
   model: "meta-llama/Llama-3.1-8B-Instruct",
-  messages: [{ role: "user", content: "Hello, nice to meet you!" }],
-  max_tokens: 512,
+  messages: \[{ role: "user", content: "Hello, nice to meet you!" }],
+  max\_tokens: 512,
 });
-console.log(out.choices[0].message);
+console.log(out.choices\[0].message);
 ```
 
 ### @huggingface/hub examples
@@ -198,27 +199,27 @@ console.log(out.choices[0].message);
 ```ts
 import { createRepo, uploadFile, deleteFiles } from "@huggingface/hub";
 
-const HF_TOKEN = "hf_...";
+const HF\_TOKEN = "hf\_...";
 
 await createRepo({
   repo: "my-user/nlp-model", // or { type: "model", name: "my-user/nlp-test" },
-  accessToken: HF_TOKEN
+  accessToken: HF\_TOKEN
 });
 
 await uploadFile({
   repo: "my-user/nlp-model",
-  accessToken: HF_TOKEN,
+  accessToken: HF\_TOKEN,
   // Can work with native File in browsers
   file: {
-    path: "pytorch_model.bin",
+    path: "pytorch\_model.bin",
     content: new Blob(...)
   }
 });
 
 await deleteFiles({
   repo: { type: "space", name: "my-user/my-space" }, // or "spaces/my-user/my-space"
-  accessToken: HF_TOKEN,
-  paths: ["README.md", ".gitattributes"]
+  accessToken: HF\_TOKEN,
+  paths: \["README.md", ".gitattributes"]
 });
 ```
 
@@ -227,17 +228,17 @@ await deleteFiles({
 ```ts
 import { Agent } from '@huggingface/mcp-client';
 
-const HF_TOKEN = "hf_...";
+const HF\_TOKEN = "hf\_...";
 
 const agent = new Agent({
   provider: "auto",
   model: "Qwen/Qwen2.5-72B-Instruct",
-  apiKey: HF_TOKEN,
-  servers: [
+  apiKey: HF\_TOKEN,
+  servers: \[
     {
       // Playwright MCP
       command: "npx",
-      args: ["@playwright/mcp@latest"],
+      args: \["@playwright/mcp@latest"],
     },
   ],
 });
@@ -246,7 +247,7 @@ await agent.loadTools();
 
 for await (const chunk of agent.run("What are the top 5 trending models on Hugging Face?")) {
     if ("choices" in chunk) {
-        const delta = chunk.choices[0]?.delta;
+        const delta = chunk.choices\[0]?.delta;
         if (delta.content) {
             console.log(delta.content);
         }
@@ -256,7 +257,7 @@ for await (const chunk of agent.run("What are the top 5 trending models on Huggi
 
 There are more features of course, check each library's README!
 
-## Formatting & testing
+## Formatting \& testing
 
 ```console
 sudo corepack enable
@@ -273,4 +274,5 @@ pnpm -r test
 pnpm -r build
 ```
 
-This will generate ESM and CJS javascript files in `packages/*/dist`, eg `packages/inference/dist/index.mjs`.
+This will generate ESM and CJS javascript files in `packages/\*/dist`, eg `packages/inference/dist/index.mjs`.
+
